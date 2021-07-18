@@ -14,10 +14,6 @@ app.get('/:id', function(req, res){
 	res.sendFile(path.join(__dirname + '/' + req.params.id + '.html'));
 });
 
-app.get('/other', function(req, res){
-	res.send('foo');
-});
-
 app.use(function(req,res){
   res.type('text/plain');
   res.status(404);
