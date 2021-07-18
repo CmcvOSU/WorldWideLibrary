@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Genre Management</title>
+ </head>
+ <body>
+   <fieldset>
+    <h1>Add a New Genre</h1>
+    <form>
+        <label for="genre_name">Genre Name:</label>
+        <input type="text" id="genre_name">
+        <button>Submit</button>
+    </form>
+  </fieldset>
+  <br>
+  <br>
+  <fieldset>
+      <h1>All Genres</h1>
+      <table>
+          <thead>
+              <tr>
+                  <th>Name</th>
+              </tr>
+          </thead>
+          <tbody>
+              <td>Fiction</td>
+              <form id="edit_genre" action="/genre/edit_genre" method="POST"></form>
+              <td>
+                  <button name="edit_genre">Edit</button>
+              </td>
+              <form id="delete_genre" action="/account/delete_genre" method="POST"></form>
+              <td>
+                  <button name="delete_genre">Delete</button>
+              </td>
+          </tbody>
+      </table>
+  </fieldset>
+ </body>
+</html>

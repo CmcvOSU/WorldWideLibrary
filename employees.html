@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>WWLibrary Employee Page</title>
+ </head>
+ <body>
+  <fieldset>
+    <h1>Add a New Librarian</h1>
+    <form>
+        <label for="lib_fName">First Name:</label>
+        <input type="text" id="lib_fName">
+        <label for="lib_lName">Last Name:</label>
+        <input type="text" id="lib_lName">
+        <label for="focus">Focus:</label>
+        <select name="focus" id="focus">
+          <option>Placeholder</option>
+        </select>
+        <button>Submit</button>
+    </form>
+  </fieldset>
+  <br>
+  <br>
+  <fieldset>
+    <h1>Patrons</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Library ID</th>
+          <th>Name</th>
+          <th>Reservation</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>001</td>
+        <td>John Doe</td>
+        <td>None</td>
+        <form id="edit_patron" action="/account/edit_patron" method="POST"></form>
+        <td>
+          <button name="edit_patron">Edit</button>
+        </td>
+        <form id="delete_patron" action="/account/delete_patron" method="POST"></form>
+        <td>
+          <button name="delete_patron">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </fieldset>
+  <br>
+  <br>
+  <a href="genres">Click here to manage Genres</a>
+  <br>
+  <a href="/rooms">Click here to manage Rooms</a>
+  <br>
+  <a href="/books">Click here to manage Books</a>
+ </body>
+</html>
