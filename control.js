@@ -7,11 +7,11 @@ app.use(express.static('public'))
 app.set('port', 3000);
 
 app.get('/', function(req, res){
-	res.sendFile(path.join(__dirname + 'index.html'));
+	res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/employees', function(req, res){
-	res.sendFile(path.join(__dirname + '/employees.html'));
+app.get('/:id', function(req, res){
+	res.sendFile(path.join(__dirname + '/' + req.params.id + '.html'));
 });
 
 app.get('/other', function(req, res){
