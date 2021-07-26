@@ -13,7 +13,7 @@ CREATE TABLE `Librarians` (
     `focus` INT(11),
     PRIMARY KEY (`employeeID`),
     CONSTRAINT `FK_GenresLibrarians`
-    FOREIGN KEY (focus) REFERENCES Genres (`id`) ON DELETE SET NULL
+    FOREIGN KEY (focus) REFERENCES Genres (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `Rooms`;
@@ -30,7 +30,7 @@ CREATE TABLE `Patrons` (
 	`lastName` VARCHAR(255),
 	`reservation` INT(11),
 	 CONSTRAINT `FK_RoomsPatrons` 
-     FOREIGN KEY (`reservation`) REFERENCES Rooms(`roomNumber`) ON DELETE SET NULL
+     FOREIGN KEY (`reservation`) REFERENCES Rooms(`roomNumber`) ON DELETE SET NULL ON UPDATE CASCADE
 	) ENGINE = InnoDB;
     
 DROP TABLE IF EXISTS `Books`;
@@ -40,7 +40,7 @@ CREATE TABLE `Books` (
 	`author` VARCHAR(255),
 	`genre` INT(11),
     CONSTRAINT `FK_GenresBooks`
-	FOREIGN KEY (`genre`) REFERENCES Genres(id) ON DELETE SET NULL
+	FOREIGN KEY (`genre`) REFERENCES Genres(id) ON DELETE SET NULL ON UPDATE CASCADE
 	) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `Patron_book`;
@@ -50,9 +50,9 @@ CREATE TABLE `Patron_book` (
 	`checkoutDate` DATE,
 	`returnDate` DATE,
     CONSTRAINT `FK_PatronsPatron_book`
-	FOREIGN KEY (`pid`) REFERENCES Patrons(libraryID) ON DELETE CASCADE,
+	FOREIGN KEY (`pid`) REFERENCES Patrons(libraryID) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `FK_BooksPatron_book`
-	FOREIGN KEY (`bid`) REFERENCES Books(isbn) ON DELETE CASCADE
+	FOREIGN KEY (`bid`) REFERENCES Books(isbn) ON DELETE CASCADE ON UPDATE CASCADE
 	) ENGINE = InnoDB;
 	  
 LOCK TABLES `Genres` WRITE;
