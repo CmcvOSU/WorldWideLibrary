@@ -1,11 +1,17 @@
+DROP TABLE IF EXISTS `Librarians`;
+DROP TABLE IF EXISTS `Patron_book`;
+DROP TABLE IF EXISTS `Books`;
+DROP TABLE IF EXISTS `Patrons`;
 DROP TABLE IF EXISTS `Genres`;
+DROP TABLE IF EXISTS `Rooms`;
+
+
 CREATE TABLE `Genres` (
     `id` INT(11) AUTO_INCREMENT NOT NULL,
     `name` VARCHAR(255),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `Librarians`;
 CREATE TABLE `Librarians` (
     `employeeID` INT(11) AUTO_INCREMENT NOT NULL,
     `first_name` VARCHAR(255),
@@ -16,14 +22,12 @@ CREATE TABLE `Librarians` (
     FOREIGN KEY (focus) REFERENCES Genres (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `Rooms`;
 CREATE TABLE `Rooms` (
     `roomNumber` INT(11) NOT NULL,
     `capacity` INT(11),
     PRIMARY KEY (`roomNumber`)
 ) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `Patrons`;
 CREATE TABLE `Patrons` (
 	`libraryID` INT(11) PRIMARY KEY AUTO_INCREMENT,
 	`firstName` VARCHAR(255),
@@ -33,7 +37,6 @@ CREATE TABLE `Patrons` (
      FOREIGN KEY (`reservation`) REFERENCES Rooms(`roomNumber`) ON DELETE SET NULL ON UPDATE CASCADE
 	) ENGINE = InnoDB;
     
-DROP TABLE IF EXISTS `Books`;
 CREATE TABLE `Books` (
 	`isbn` VARCHAR(255) PRIMARY KEY,
 	`title` VARCHAR(255),
@@ -43,7 +46,6 @@ CREATE TABLE `Books` (
 	FOREIGN KEY (`genre`) REFERENCES Genres(id) ON DELETE SET NULL ON UPDATE CASCADE
 	) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `Patron_book`;
 CREATE TABLE `Patron_book` (
 	`pid` INT(11),
 	`bid` VARCHAR(255),
@@ -58,15 +60,16 @@ CREATE TABLE `Patron_book` (
 LOCK TABLES `Genres` WRITE;
 INSERT INTO Genres (name) VALUES ("Fiction");
 INSERT INTO Genres (name) VALUES ("Horror");
-INSERT INTO Genres (name) VALUES ("American History");
+INSERT INTO Genres (name) VALUES ("Tragedy");
 UNLOCK TABLES;
 
 LOCK TABLES `Books` WRITE;
 INSERT INTO `Books` VALUES ('9780446310789', 'To Kill a Mockingbird', 'Harper Lee', 1), 
 ('19849780140862539', '1984', 'George Orwell', 1), 
 ('9781405879910', 'The Great Gatsby', 'F. Scott Fitzgerald', 3), 
-('9783839893876', 'Pride and Prejudice', 'Jane Austen', 2), 
-('9780399529207', 'Lord of the Flies', 'William Golding', 3);  
+('9783839893876', 'Pride and Prejudice', 'Jane Austen', NULL), 
+('9780399529207', 'Lord of the Flies', 'William Golding', NUll);  
+('9781982136079', '1922', 'Stephen King', 2)
 UNLOCK TABLES;
 
 LOCK TABLES `Librarians` WRITE;
@@ -82,9 +85,9 @@ INSERT INTO Rooms (roomNumber, capacity) VALUES (101, 2);
 UNLOCK TABLES;
 
 LOCK TABLES `Patrons` WRITE;
-INSERT INTO `Patrons` VALUES (1, 'Daniel', 'Park', NULL), (2, 'Muhammad', 'Lee', NULL), 
-(3, 'Michael', 'Calmis', NULL), (4, 'Mason', 'Sperling', NULL), (5, 'Emily', 'Koch', NULL), 
-(6, 'Cordelia', 'Watson', NULL), (7, 'Danny', 'Padilla', NULL);
+INSERT INTO `Patrons` VALUES (1, 'Daniel', 'Park', 102), (2, 'Muhammad', 'Lee', 102), 
+(3, 'Michael', 'Calmis', NULL), (4, 'Mason', 'Sperling', 100), (5, 'Emily', 'Koch', NULL), 
+(6, 'Cordelia', 'Watson', NULL), (7, 'Danny', 'Padilla', 100);
 UNLOCK TABLES;
 
 LOCK TABLES `Patron_book` WRITE;
