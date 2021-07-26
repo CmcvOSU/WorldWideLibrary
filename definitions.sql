@@ -12,6 +12,7 @@ CREATE TABLE `Librarians` (
     `last_name` VARCHAR(255),
     `focus` INT(11),
     PRIMARY KEY (`employeeID`),
+    CONSTRAINT `FK_GenresLibrarians`
     FOREIGN KEY (focus) REFERENCES Genres (`id`) ON DELETE SET NULL
 ) ENGINE = InnoDB;
 
@@ -28,17 +29,8 @@ CREATE TABLE `Patrons` (
 	`firstName` VARCHAR(255),
 	`lastName` VARCHAR(255),
 	`reservation` INT(11),
-	FOREIGN KEY (`reservation`) REFERENCES Rooms(`roomNumber`) ON DELETE SET NULL
-	) ENGINE = InnoDB;
-
-DROP TABLE IF EXISTS `Patron_book`;
-CREATE TABLE `Patron_book` (
-	`pid` INT(11),
-	`bid` VARCHAR(255),
-	`checkoutDate` DATE,
-	`returnDate` DATE,
-	FOREIGN KEY (`pid`) REFERENCES Patrons(libraryID) ON DELETE CASCADE,
-	FOREIGN KEY (`bid`) REFERENCES Books(isbn) ON DELETE CASCADE
+	 CONSTRAINT `FK_RoomsPatrons` 
+     FOREIGN KEY (`reservation`) REFERENCES Rooms(`roomNumber`) ON DELETE SET NULL
 	) ENGINE = InnoDB;
     
 DROP TABLE IF EXISTS `Books`;
@@ -47,7 +39,20 @@ CREATE TABLE `Books` (
 	`title` VARCHAR(255),
 	`author` VARCHAR(255),
 	`genre` INT(11),
+    CONSTRAINT `FK_GenresBooks`
 	FOREIGN KEY (`genre`) REFERENCES Genres(id) ON DELETE SET NULL
+	) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `Patron_book`;
+CREATE TABLE `Patron_book` (
+	`pid` INT(11),
+	`bid` VARCHAR(255),
+	`checkoutDate` DATE,
+	`returnDate` DATE,
+    CONSTRAINT `FK_PatronsPatron_book`
+	FOREIGN KEY (`pid`) REFERENCES Patrons(libraryID) ON DELETE CASCADE,
+    CONSTRAINT `FK_BooksPatron_book`
+	FOREIGN KEY (`bid`) REFERENCES Books(isbn) ON DELETE CASCADE
 	) ENGINE = InnoDB;
 	  
 LOCK TABLES `Genres` WRITE;
