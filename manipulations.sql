@@ -74,5 +74,9 @@ DELETE FROM `Books` WHERE `isbn` = @isbn;
 -- Adding a rental (CREATE)
 INSERT INTO `Patron_book` (`pid`, `bid`, `checkoutDate`, `returnDate`) VALUES (@pid, @bid, @checkoutDate, @returnDate);
 
+-- Viewing Rentals (SELECT)
+SELECT Patrons.libraryID as `pid`, Books.isbn as `bid`, `checkoutDate`, `returnDate` FROM Patron_book LEFT JOIN `Patrons` ON `pid` = Patrons.libraryID
+LEFT JOIN `Books` ON `bid` = Books.isbn; 
+
 -- Returning book (DELETE)
 DELETE FROM `Patron_book` WHERE `pid` = @pid AND `bid` = @bid;
