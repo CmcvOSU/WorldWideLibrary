@@ -14,8 +14,8 @@ CREATE TABLE `Genres` (
 
 CREATE TABLE `Librarians` (
     `employeeID` INT(11) AUTO_INCREMENT NOT NULL,
-    `first_name` VARCHAR(255),
-    `last_name` VARCHAR(255),
+    `firstName` VARCHAR(255),
+    `lastName` VARCHAR(255),
     `focus` INT(11),
     PRIMARY KEY (`employeeID`),
     CONSTRAINT `FK_GenresLibrarians`
@@ -58,9 +58,9 @@ CREATE TABLE `Patron_book` (
 	) ENGINE = InnoDB;
 	  
 LOCK TABLES `Genres` WRITE;
-INSERT INTO Genres (name) VALUES ("Fiction");
-INSERT INTO Genres (name) VALUES ("Horror");
-INSERT INTO Genres (name) VALUES ("Tragedy");
+INSERT INTO `Genres` (`name`) VALUES ("Fiction");
+INSERT INTO `Genres` (`name`) VALUES ("Horror");
+INSERT INTO `Genres` (`name`) VALUES ("Tragedy");
 UNLOCK TABLES;
 
 LOCK TABLES `Books` WRITE;
@@ -68,20 +68,20 @@ INSERT INTO `Books` VALUES ('9780446310789', 'To Kill a Mockingbird', 'Harper Le
 ('19849780140862539', '1984', 'George Orwell', 1), 
 ('9781405879910', 'The Great Gatsby', 'F. Scott Fitzgerald', 3), 
 ('9783839893876', 'Pride and Prejudice', 'Jane Austen', NULL), 
-('9780399529207', 'Lord of the Flies', 'William Golding', NUll);  
-('9781982136079', '1922', 'Stephen King', 2)
+('9780399529207', 'Lord of the Flies', 'William Golding', NUll), 
+('9781982136079', '1922', 'Stephen King', 2);
 UNLOCK TABLES;
 
 LOCK TABLES `Librarians` WRITE;
-INSERT INTO Librarians (first_name, last_name, focus) VALUES ("Benjamin", "Murphy", 2);
-INSERT INTO Librarians (first_name, focus) VALUES ("Jack", 1);
-INSERT INTO Librarians (first_name, last_name) VALUES ("Jessica", "Barn");
+INSERT INTO `Librarians` (`firstName`, `lastName`, `focus`) VALUES ("Benjamin", "Murphy", 2);
+INSERT INTO `Librarians` (`firstName`, `focus`) VALUES ("Jack", 1);
+INSERT INTO `Librarians` (`firstName`, `lastName`) VALUES ("Jessica", "Barn");
 UNLOCK TABLES;
 
 LOCK TABLES `Rooms` WRITE;
-INSERT INTO Rooms (roomNumber, capacity) VALUES (102, 50);
-INSERT INTO Rooms (roomNumber, capacity) VALUES (100, 10);
-INSERT INTO Rooms (roomNumber, capacity) VALUES (101, 2);
+INSERT INTO `Rooms` (`roomNumber`, `capacity`) VALUES (102, 50);
+INSERT INTO `Rooms` (`roomNumber`, `capacity`) VALUES (100, 10);
+INSERT INTO `Rooms` (`roomNumber`, `capacity`) VALUES (101, 2);
 UNLOCK TABLES;
 
 LOCK TABLES `Patrons` WRITE;
