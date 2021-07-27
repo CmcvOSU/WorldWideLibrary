@@ -66,6 +66,10 @@ INSERT INTO `Books` (`isbn`, `title`, `author`, `genre`) VALUES (@isbn, @title, 
 -- Viewing books
 SELECT `isbn`, `title`, `author`, Genres.name as `genre` FROM `Books` LEFT JOIN `Genres` ON `genre` = Genres.id;
 
+-- Searching for a book
+SELECT `isbn`, `title`, `author`, Genres.name as `genre` FROM `Books` LEFT JOIN `Genres` ON `genre` = Genres.id
+WHERE `title` = @title;
+
 -- Editing books
 UPDATE `Books` SET `title` = @title, `author` = @author, `genre` = @book_genre WHERE `isbn` = @book_genre;
 
