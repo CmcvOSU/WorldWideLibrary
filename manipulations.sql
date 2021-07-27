@@ -28,18 +28,18 @@ DELETE FROM `Genres` WHERE `id` = @genre_id
 UPDATE `Genres` SET `name` = @genre_name WHERE `id` = @genre_id
 
 
---## Librarians Queries ##
---gets employeeID, firstName, lastName, and focus from Librarians entity
+-- ## Librarians Queries ##
+-- gets employeeID, firstName, lastName, and focus from Librarians entity
 SELECT `employeeID`, `firstName`, `lastName`, Genres.name as `focus` FROM `Librarians` LEFT JOIN `Genres` ON `focus` = Genres.id;
 
---adds row to Librarians 
+-- adds row to Librarians 
 INSERT INTO `Librarians` (`firstName`, `lastName`, `focus`) VALUES (@lib_fName, @lib_lName, @focus)
 
---deletes row from Librarians
+-- deletes row from Librarians
 DELETE FROM `Librarians` WHERE `employeeID` = @employee_id
 
---edits 
-UPDATE `Librarioans` SET `firstName` = @lib_fName, `lastName` = @lib_lName, `focus` = @focus WHERE `employeeID` = @employee_id
+-- edits row from Librarians 
+UPDATE `Librarians` SET `firstName` = @lib_fName, `lastName` = @lib_lName, `focus` = @focus WHERE `employeeID` = @employee_id
 
 
 
