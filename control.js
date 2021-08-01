@@ -1,17 +1,27 @@
+
+// Setup
+var db = require('./database/db-connector.js')
+
 var express = require('express');
-const path = require('path');
-
 var app = express();
-app.use(express.static('public'))
-
 app.set('port', 2098);
 
-app.get('/', function(req, res){
-	res.sendFile(path.join(__dirname + '/index.html'));
+var exphbs = require('express-handlebars');
+app.engine('.hbs', exphbs({
+  extname:".hbs"
+}));
+app.set('view engine', '.hbs');
+
+
+// Routes
+
+app.get('/', function(req, res)
+{
+  res.render('index')
 });
 
 app.get('/:id', function(req, res){
-	res.sendFile(path.join(__dirname + '/' + req.params.id + '.html'));
+	res.render(req.params.id);
 });
 
 app.use(function(req,res){
@@ -26,6 +36,8 @@ app.use(function(err, req, res, next){
   res.status(500);
   res.send('500 - Server Error');
 });
+
+//Listener
 
 app.listen(app.get('port'), function(){
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
