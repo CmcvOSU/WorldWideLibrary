@@ -1,40 +1,40 @@
 
 // Setup
-var db = require('./database/db-connector.js')
-
+var mysql = require('./database/db-connector.js');
+var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 app.set('port', 2098);
 
 var exphbs = require('express-handlebars');
+const patron_account = require('./patron_account.js');
 app.engine('.hbs', exphbs({
   extname:".hbs"
 }));
 app.set('view engine', '.hbs');
+app.set('mysql', mysql);
+app.use(bodyParser.urlencoded({extended:true}));
 
 
 // Routes
-
-app.get('/', function(req, res)
-{
-  res.render('index')
-});
-
-app.get('/:id', function(req, res){
-	res.render(req.params.id);
-});
+app.use('/', require('./index.js'));
+app.use('/patron_account', require('./patron_account.js'));
+app.use('/books', require('./books.js'));
+app.use('/create_patron', require('./create_patron.js'));
+app.use('/employees', require('./employees.js'));
+app.use('/genres', require('./genres.js'));
+app.use('/patrons', require('./patrons.js'));
+app.use('/rooms', require('./rooms.js'));
 
 app.use(function(req,res){
-  res.type('text/plain');
   res.status(404);
-  res.send('404 - Not Found');
+  res.render('404');
 });
 
 app.use(function(err, req, res, next){
   console.error(err.stack);
-  res.type('plain/text');
   res.status(500);
-  res.send('500 - Server Error');
+  res.render('500');
 });
 
 //Listener

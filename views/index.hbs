@@ -14,13 +14,15 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each books}}
                 <tr>
-                    <td>978-0345418913</td>
-                    <td>The Hitchhiker's Guide to the Galaxy</td>
-                    <td>Douglas Adams</td>
-                    <td>Science Fiction</td>
+                    <td>{{isbn}}</td>
+                    <td>{{title}}</td>
+                    <td>{{author}}</td>
+                    <td>{{genre}}</td>
                     <td><button type="button" onlick="">Borrow</button></td>
                 </tr>
+                {{/each}}
             </tbody>
         </table>
         <br>
@@ -55,12 +57,16 @@
                     <th>Capacity</th>
                     <th></th>
                 </tr>
+            </thead>
+            <tbody>
+                {{#each rooms}}
                 <tr>
-                    <td>102</td>
-                    <td>50</td>
+                    <td>{{roomNumber}}</td>
+                    <td>{{capacity}}</td>
                     <td><button type="button" onlick="">Reserve</button></td>
                 </tr>
-            </thead>
+                {{/each}}
+            </tbody>
         </table>
     </fieldset>
     <br>
