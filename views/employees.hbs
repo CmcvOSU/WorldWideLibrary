@@ -12,11 +12,15 @@
         </tr>
       </thead>
       <tbody>
-        <td>001</td>
-        <td>John</td>
-        <td>Smith</td>
-        <td>American Classics</td>
-        <td><button type="button" onclick="">Edit</button><button type="button" onclick="">Delete</button></td>
+        {{#each employees}}
+        <tr>
+          <td>{{employeeID}}</td>
+          <td>{{firstName}}</td>
+          <td>{{lastName}}</td>
+          <td>{{focus}}</td>
+          <td><button type="button" onclick="">Edit</button><button type="button" onclick="">Delete</button></td>
+        </tr>
+        {{/each}}
       </tbody>
     </table>
     <fieldset>

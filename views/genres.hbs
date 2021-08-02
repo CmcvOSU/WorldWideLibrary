@@ -21,12 +21,16 @@
               </tr>
           </thead>
           <tbody>
-              <td>01</td>
-              <td>Fiction</td>
-              <td>
-                  <button type="button" name="edit_genre">Edit</button>
-                  <button type="button" name="delete_genre">Delete</button>
-              </td>
+              {{#each genres}}
+              <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                    <td>
+                        <button type="button" name="edit_genre">Edit</button>
+                        <button type="button" name="delete_genre">Delete</button>
+                    </td>
+              </tr>
+              {{/each}}
           </tbody>
       </table>
   </fieldset>

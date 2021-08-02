@@ -3,7 +3,7 @@ module.exports = function(){
     var router = express.Router();
 
     function getBooks(res, mysql, context, complete){
-        mysql.pool.query("SELECT `isbn`, `title`, `author`, Genres.name as `genre` FROM `Books` LEFT JOIN `Genres` ON `genre` = Genres.id;", function(error, results, fields){
+        mysql.pool.query("SELECT `isbn`, `title`, `author`, Genres.name as `genre` FROM `Books` LEFT JOIN `Genres` ON `genre` = Genres.id", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();

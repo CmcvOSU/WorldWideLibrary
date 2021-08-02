@@ -13,16 +13,18 @@
             </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>001</td>
-            <td>John</td>
-            <td>Doe</td>
-            <td>NULL</td>
-            <td>
-              <button type="button" name="edit_patron">Edit</button>
-              <button type="button" name="delete_patron">Delete</button>
-            </td>
-          </tr>
+            {{#each patrons}}
+            <tr>
+              <td>{{libraryID}}</td>
+              <td>{{firstName}}</td>
+              <td>{{lastName}}</td>
+              <td>{{reservation}}</td>
+              <td>
+                <button type="button" name="edit_patron">Edit</button>
+                <button type="button" name="delete_patron">Delete</button>
+              </td>
+            </tr>
+            {{/each}}
           </tbody>
         </table>
       </fieldset>

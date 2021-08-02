@@ -4,25 +4,37 @@ module.exports = function(){
 
     // helper functions containing queries to be added
 
-    router.get('/', function(req, res) {
-        res.render('rooms')
-    });
+    function getRooms(res, mysql, context, complete){
+        mysql.pool.query("SELECT `roomNumber`, `capacity` FROM `Rooms`", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.rooms  = results;
+            complete();
+        });
+    }
+
+
+    // router.get('/', function(req, res) {
+    //     res.render('rooms')
+    // });
 
     // routes creating dynamic interation between web app and database 
 
-    // router.get('/', function(req, res){
-    //     var callbackCount = 0;
-    //     var context = {};
-    //     // context.jsscripts = ["deleteperson.js"];
-    //     var mysql = req.app.get('mysql');
-    //     // helper function calls
-    //     function complete(){
-    //         callbackCount++;
-    //         if(callbackCount >= 2){
-    //             res.render('patron_account', context);
-    //         }
+    router.get('/', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        // context.jsscripts = ["deleteperson.js"];
+        var mysql = req.app.get('mysql');
+        getRooms(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('rooms', context);
+            }
 
-    //     }
-    // });
+        }
+    });
     return router;
 }();

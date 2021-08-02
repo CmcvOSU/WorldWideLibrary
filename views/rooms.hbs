@@ -23,12 +23,16 @@
                 </tr>
             </thead>
             <tbody>
-                <td>102</td>
-                <td>50</td>
-                <td>
-                    <button type="button" name="edit_genre">Edit</button>
-                    <button type="button" name="delete_genre">Delete</button>
-                </td>
+                {{#each rooms}}
+                <tr>
+                    <td>{{roomNumber}}</td>
+                    <td>{{capacity}}</td>
+                    <td>
+                        <button type="button" name="edit_genre">Edit</button>
+                        <button type="button" name="delete_genre">Delete</button>
+                    </td>
+                </tr>
+                {{/each}}
             </tbody>
         </table>
     </fieldset>

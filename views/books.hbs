@@ -13,15 +13,20 @@
                     <th>Genre</th>
                     <th></th>
                 </tr>
+            </thead>
+            <tbody>
+                {{#each books}}
                 <tr>
-                    <td>978-0345418913</td>
-                    <td>The Hitchhiker's Guide to the Galaxy</td>
-                    <td>Douglas Adams</td>
-                    <td>Science Fiction</td>
+                    <td>{{isbn}}</td>
+                    <td>{{title}}</td>
+                    <td>{{books}}</td>
+                    <td>{{genre}}</td>
                     <td><button type="button" onlick="">Edit</button>
                         <button type="button" onlick="">Delete</button></td>
                 </tr>
-            </thead>
+                {{/each}}
+            </tbody>
+
         </table>
         <br>
         <fieldset>
