@@ -18,7 +18,7 @@
           <td>{{firstName}}</td>
           <td>{{lastName}}</td>
           <td>{{focus}}</td>
-          <td><button type="button" onclick="">Edit</button><button type="button" onclick="">Delete</button></td>
+          <td><button type="button" onclick="">Edit</button><button type="button" name="delete_librarian" onclick="deleteLibrarian({{employeeID}})">Delete</button></td>
         </tr>
         {{/each}}
       </tbody>

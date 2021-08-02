@@ -7,13 +7,13 @@ var app = express();
 app.set('port', 2098);
 
 var exphbs = require('express-handlebars');
-const patron_account = require('./patron_account.js');
 app.engine('.hbs', exphbs({
   extname:".hbs"
 }));
 app.set('view engine', '.hbs');
 app.set('mysql', mysql);
 app.use(bodyParser.urlencoded({extended:true}));
+app.use('/static', express.static('public'));
 
 
 // Routes
