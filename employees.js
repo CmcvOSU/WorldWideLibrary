@@ -15,6 +15,17 @@ module.exports = function(){
             complete();
         });
     }
+
+    function getGenres(res, mysql, context, complete){
+        mysql.pool.query("SELECT `id`, `name` from `Genres`", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.genres  = results;
+            complete();
+        });
+    }
     // router.get('/', function(req, res) {
     //     res.render('employees')
     // });
@@ -27,13 +38,29 @@ module.exports = function(){
         // context.jsscripts = ["deleteperson.js"];
         var mysql = req.app.get('mysql');
         getLibrarians(res, mysql, context, complete);
+        getGenres(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('employees', context);
             }
 
         }
     });
+
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO `Librarians` (`firstName`, `lastName`, `focus`) VALUES (?, ?, ?)";
+        var inserts = [req.body.lib_fName, req.body.lib_lName, req.body.focus];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/employees');
+            }
+        });
+    });
+
     return router;
 }();

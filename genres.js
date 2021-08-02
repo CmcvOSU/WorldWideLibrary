@@ -35,5 +35,22 @@ module.exports = function(){
 
         }
     });
+
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO `Genres` (`name`) VALUES (?)";
+        if (req.body.genre_name ==""){
+            return;
+        }
+        var inserts = [req.body.genre_name];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/genres');
+            }
+        });
+    });
     return router;
 }();

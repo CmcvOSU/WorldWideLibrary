@@ -36,5 +36,23 @@ module.exports = function(){
 
         }
     });
+
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO `Rooms` VALUES (?, ?)";
+        if (req.body.room_num ==""){
+            return;
+        }
+        var inserts = [req.body.room_num, req.body.capacity];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/rooms');
+            }
+        });
+    });
+
     return router;
 }();

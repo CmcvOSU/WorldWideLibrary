@@ -25,14 +25,16 @@
     </table>
     <fieldset>
       <h1>Add a New Librarian</h1>
-      <form>
+      <form id="addLibrarian" action="/employees" method="post">
           <label for="lib_fName">First Name:</label>
-          <input type="text" id="lib_fName">
+          <input type="text" id="lib_fName" name="lib_fName">
           <label for="lib_lName">Last Name:</label>
-          <input type="text" id="lib_lName">
+          <input type="text" id="lib_lName" name="lib_lName">
           <label for="focus">Focus:</label>
           <select name="focus" id="focus">
-            <option>Placeholder</option>
+            {{#each genres}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
           </select>
           <button>Submit</button>
       </form>
