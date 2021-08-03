@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogue management</title>
-</head>
-<body>
-    <a href="/">Homepage</a>
+<a href="/">Homepage</a>
     <a href="/employees">Back to Librarian Access</a>
     <br>
     <br>
@@ -22,15 +13,23 @@
                     <th>Genre</th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>978-0345418913</td>
-                    <td>The Hitchhiker's Guide to the Galaxy</td>
-                    <td>Douglas Adams</td>
-                    <td>Science Fiction</td>
-                    <td><button type="button" onlick="">Edit</button>
-                        <button type="button" onlick="">Delete</button></td>
-                </tr>
             </thead>
+            <tbody>
+                {{#each books}}
+                <tr>
+                    <td>{{isbn}}</td>
+                    <td>{{title}}</td>
+                    <td>{{author}}</td>
+                    <td>{{books}}</td>
+                    <td>{{genre}}</td>
+                    <td>
+                        <button type="button" onlick="">Edit</button>
+                        <button type="button" name="delete_book" onclick="deleteBook({{isbn}})">Delete</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+
         </table>
         <br>
         <fieldset>
@@ -45,10 +44,9 @@
                 <input type="text" id="author" name="author">
                 <label for="genre">Genre:</label>
                 <select id="genre" name="genre">
-                    <option></option>
-                    <option>Science fiction</option>
-                    <option>Mystery</option>
-                    <option>Historical fiction</option>
+                    {{#each genres}}
+                    <option value="{{id}}">{{name}}</option>
+                    {{/each}}
                 </select>
                 <button type="button" onclick="" >Search</button>
             </form>
@@ -57,7 +55,7 @@
     <br>
     <fieldset>
         <h2>Add a book:</h2>
-        <form action="" method=""> <!-- action and method to be added-->
+        <form id="addBook" action="/books" method="POST">
             <label for="isbn">ISBN:</label>
             <input type="text" id="isbn" name="isbn">
             <label for="title">Title:</label>
@@ -66,13 +64,10 @@
             <input type="text" id="author" name="author">
             <label for="genre">Genre:</label>
             <select id="genre" name="genre">
-                <option></option>
-                <option>Science fiction</option>
-                <option>Mystery</option>
-                <option>Historical fiction</option>
+                {{#each genres}}
+                <option value="{{id}}">{{name}}</option>
+                {{/each}}
             </select>
-            <button type="button" onclick="" >Add</button>
+            <button>Add</button>
         </form>
     </fieldset>
-</body>
-</html>

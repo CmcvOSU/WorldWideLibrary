@@ -38,7 +38,7 @@ CREATE TABLE `Patrons` (
 	) ENGINE = InnoDB;
     
 CREATE TABLE `Books` (
-	`isbn` VARCHAR(255) PRIMARY KEY,
+	`isbn` INT(255) PRIMARY KEY,
 	`title` VARCHAR(255),
 	`author` VARCHAR(255),
 	`genre` INT(11),
@@ -48,7 +48,7 @@ CREATE TABLE `Books` (
 
 CREATE TABLE `Patron_book` (
 	`pid` INT(11),
-	`bid` VARCHAR(255),
+	`bid` INT(255),
 	`checkoutDate` DATE,
 	`returnDate` DATE,
     CONSTRAINT `FK_PatronsPatron_book`

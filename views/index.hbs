@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WWLibrary Homepage</title>
-</head>
-<body>
-    <button type="button" name="login">Login</button>
+<!-- index.hbs -->
+<button type="button" name="login">Login</button>
     <h1>World Wide Library</h1>
     <fieldset>
         <h2>Books Catalogue:</h2>
@@ -22,13 +14,15 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each books}}
                 <tr>
-                    <td>978-0345418913</td>
-                    <td>The Hitchhiker's Guide to the Galaxy</td>
-                    <td>Douglas Adams</td>
-                    <td>Science Fiction</td>
+                    <td>{{isbn}}</td>
+                    <td>{{title}}</td>
+                    <td>{{author}}</td>
+                    <td>{{genre}}</td>
                     <td><button type="button" onlick="">Borrow</button></td>
                 </tr>
+                {{/each}}
             </tbody>
         </table>
         <br>
@@ -63,17 +57,19 @@
                     <th>Capacity</th>
                     <th></th>
                 </tr>
+            </thead>
+            <tbody>
+                {{#each rooms}}
                 <tr>
-                    <td>102</td>
-                    <td>50</td>
+                    <td>{{roomNumber}}</td>
+                    <td>{{capacity}}</td>
                     <td><button type="button" onlick="">Reserve</button></td>
                 </tr>
-            </thead>
+                {{/each}}
+            </tbody>
         </table>
     </fieldset>
     <br>
     <p>New Patron? <a href="/create_patron">Create an account</a></p>
     <a href="/patron_account">Patron Account Page</a>
     <a href="/employees">Librarian Access</a>
-</body>
-</html>
