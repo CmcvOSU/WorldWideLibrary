@@ -35,5 +35,23 @@ module.exports = function(){
 
         }
     });
+
+    router.post('/', function(req,res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO `Books` VALUES (?, ?, ?, ?)";
+        if (req.body.isbn == ""){
+            return;
+        }
+        var inserts = [req.body.isbn, req.body.title, req.body.author, req.body.genre];
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            } else {
+                res.redirect('/books');
+            }
+        });
+    });
+
     return router;
 }();

@@ -33,8 +33,8 @@ module.exports = function(){
             if(callbackCount >= 1){
                 res.render('patrons', context);
             }
-
         }
     });
+
     return router;
 }();
