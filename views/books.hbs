@@ -19,6 +19,7 @@
                 <tr>
                     <td>{{isbn}}</td>
                     <td>{{title}}</td>
+                    <td>{{author}}</td>
                     <td>{{books}}</td>
                     <td>{{genre}}</td>
                     <td><button type="button" onlick="">Edit</button>
@@ -52,7 +53,7 @@
     <br>
     <fieldset>
         <h2>Add a book:</h2>
-        <form action="" method=""> <!-- action and method to be added-->
+        <form id="addBook" action="/books" method="POST">
             <label for="isbn">ISBN:</label>
             <input type="text" id="isbn" name="isbn">
             <label for="title">Title:</label>
@@ -65,6 +66,6 @@
                 <option value="{{id}}">{{name}}</option>
                 {{/each}}
             </select>
-            <button type="button" onclick="" >Add</button>
+            <button>Add</button>
         </form>
     </fieldset>

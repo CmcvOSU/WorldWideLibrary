@@ -10,20 +10,6 @@ module.exports = function(){
 
     // routes creating dynamic interation between web app and database 
 
-    router.get('/', function(req, res){
-        var callbackCount = 0;
-        var context = {};
-        // context.jsscripts = ["deleteperson.js"];
-        var mysql = req.app.get('mysql');
-        // helper function calls
-        function complete(){
-            callbackCount++;
-            if(callbackCount >= 2){
-                res.render('patrons', context);
-            }
-        }
-    });
-
     router.post('/', function(req,res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO `Patrons` (`firstName`, `lastName`) VALUES (?, ?)";
@@ -37,7 +23,6 @@ module.exports = function(){
             }
         });
     });
-
 
     return router;
 }();

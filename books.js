@@ -14,6 +14,16 @@ module.exports = function(){
         });
     }
 
+    function getGenres(res, mysql, context, complete){
+        mysql.pool.query("SELECT `id`, `name` from `Genres`", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.genres  = results;
+            complete();
+        });
+    }
 
     // router.get('/', function(req, res) {
     //     res.render('books')
@@ -27,9 +37,10 @@ module.exports = function(){
         // context.jsscripts = ["deleteperson.js"];
         var mysql = req.app.get('mysql');
         getBooks(res, mysql, context, complete);
+        getGenres(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('books', context);
             }
 
