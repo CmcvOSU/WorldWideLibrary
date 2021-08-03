@@ -22,8 +22,10 @@
                     <td>{{author}}</td>
                     <td>{{books}}</td>
                     <td>{{genre}}</td>
-                    <td><button type="button" onlick="">Edit</button>
-                        <button type="button" onlick="">Delete</button></td>
+                    <td>
+                        <button type="button" onlick="">Edit</button>
+                        <button type="button" name="delete_book" onclick="deleteBook({{isbn}})">Delete</button>
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>
