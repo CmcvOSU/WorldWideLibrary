@@ -3,8 +3,17 @@ module.exports = function(){
     var router = express.Router();
 
     // helper functions containing queries to be added
-    function getBooks(res, mysql, context, complete){
-        mysql.pool.query("SELECT `isbn`, `title`, `author`, Genres.name as `genre` FROM `Books` LEFT JOIN `Genres` ON `genre` = Genres.id", function(error, results, fields){
+    function getBooks(req, res, mysql, context, complete){
+        if (req.query.genre === undefined) {
+            sqlQuery = "SELECT `isbn`, `title`, `author`, Genres.name as `genre` FROM `Books` LEFT JOIN `Genres` ON `genre` = Genres.id"
+        }
+        else if (req.query.genre === ""){
+            sqlQuery = "SELECT `isbn`, `title`, `author`, Genres.name as `genre` FROM `Books` LEFT JOIN `Genres` ON `genre` = Genres.id"
+        }
+        else {
+            sqlQuery = "SELECT isbn, title, author, Genres.name as genre FROM Books LEFT JOIN Genres ON genre = Genres.id WHERE genre ="+ req.query.genre
+        }
+        mysql.pool.query(sqlQuery, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -49,7 +58,7 @@ module.exports = function(){
         var context = {};
         context.jsscripts = ["deleteBook.js"];
         var mysql = req.app.get('mysql');
-        getBooks(res, mysql, context, complete);
+        getBooks(req, res, mysql, context, complete);
         getGenres(res, mysql, context, complete);
         function complete(){
             callbackCount++;
