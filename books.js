@@ -25,6 +25,19 @@ module.exports = function(){
         });
     }
 
+    function getBook(res, mysql, context, id, complete){
+        var sqlQuery = "SELECT `isbn`, `title`, `author`, `genre` from Books WHERE isbn = ?";
+        var inserts = [id];
+        mysql.pool.query(sqlQuery, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.book  = results[0];
+            complete();
+        });
+    }
+
     // router.get('/', function(req, res) {
     //     res.render('books')
     // });
@@ -47,6 +60,22 @@ module.exports = function(){
         }
     });
 
+    router.get('/:id', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["selectGenre.js", "updateBook.js"];
+        var mysql = req.app.get('mysql');
+        getBook(res, mysql, context, req.params.id, complete);
+        getGenres(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('update_book', context);
+            }
+
+        }
+    });
+
     router.post('/', function(req,res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO `Books` VALUES (?, ?, ?, ?)";
@@ -64,6 +93,20 @@ module.exports = function(){
         });
     });
 
+    router.put('/:id', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE Books SET isbn=?, title=?, author=?, genre=? WHERE isbn=?";
+        var inserts = [req.body.isbn, req.body.title, req.body.author, req.body.genre, req.params.id];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
+    });
 
     router.delete('/:id', function(req,res){
         var mysql = req.app.get('mysql');

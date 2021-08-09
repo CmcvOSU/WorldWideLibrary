@@ -1,0 +1,19 @@
+<h1>Update {{book.title}}</h1>
+<fieldset>
+    <form id="update_book" action="/books" method="POST">
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" name="isbn" value="{{book.isbn}}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{book.title}}">
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" value="{{book.author}}">
+        <label for="genre">Genre:</label>
+        <select id="genre" name="genre">
+            {{#each genres}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+        </select>
+        <button onclick="updateBook({{book.isbn}})">Update</button>
+    </form>
+</fieldset>
+<script defer>selectGenre({{book.genre}});</script>
