@@ -88,7 +88,7 @@ module.exports = function(){
     router.get('/patron_reservation/:id', function(req, res){
         callbackCount = 0;
         var context = {id:req.params.id};
-        context.jsscripts = ["updatePatron.js"];
+        context.jsscripts = ["updatePatron.js, selectRoom.js"];
         var mysql = req.app.get('mysql');
         getPatrons(res, mysql, context, complete);
         function complete(){
@@ -96,7 +96,6 @@ module.exports = function(){
             if(callbackCount >= 1){
                 res.render('patron_reservation', context);
             }
-
         }
     });
 
@@ -118,7 +117,7 @@ module.exports = function(){
     router.get('/borrow/:id', function (req, res) {
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["borrowBook.js", "selectPatrons.js"];
+        context.jsscripts = [];
         var mysql = req.app.get('mysql');
         getBook(res, mysql, context, req.params.id, complete);
         getPatrons(res, mysql, context, complete);

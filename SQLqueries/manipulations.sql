@@ -10,7 +10,7 @@ INSERT INTO `Rooms` VALUES (@room_num, @capacity);
 -- deletes row from Rooms 
 DELETE FROM `Rooms` WHERE `roomNumber` = @room_num;
 
--- edits row in Rooms
+-- edits row in Rooms (unused)
 UPDATE `Rooms` SET  `capacity` = @capacity WHERE `roomNumber` = @room_num;
 
 
@@ -24,7 +24,7 @@ INSERT INTO `Genres` (`name`) VALUES (@genre_name);
 -- delete row from Genres
 DELETE FROM `Genres` WHERE `id` = @genre_id;
 
--- edits row in Genres
+-- edits row in Genres (unused)
 UPDATE `Genres` SET `name` = @genre_name WHERE `id` = @genre_id;
 
 
@@ -38,7 +38,7 @@ INSERT INTO `Librarians` (`firstName`, `lastName`, `focus`) VALUES (@lib_fName, 
 --deletes row from Librarians
 DELETE FROM `Librarians` WHERE `employeeID` = @employee_id;
 
---edits row in Librarians 
+--edits row in Librarians (unused)
 UPDATE `Librarians` SET `firstName` = @lib_fName, `lastName` = @lib_lName, `focus` = @focus WHERE `employeeID` = @employee_id;
 
 
@@ -49,10 +49,10 @@ INSERT INTO `Patrons` (`firstName`, `lastName`) VALUES (@pat_fName, @pat_lName);
 -- Viewing Patrons
 SELECT `libraryID`, `firstName`, `lastName`, Rooms.roomNumber as`reservation` FROM `Patrons` LEFT JOIN `Rooms` ON `reservation` = Rooms.roomNumber;
 
--- gets room reserved by specific patron
+-- gets room reserved by specific patron (unsed)
 SELECT Rooms.roomNumber as `reservation` from `Patrons` INNER JOIN `Rooms` ON `reservation` = Rooms.roomNumber WHERE `libraryID` = @patron_id;
 
--- Editing Patrons
+-- Editing Patrons (unused)
 UPDATE `Patrons` SET `firstName` = @pat_fName, `lastName` = @pat_lName, `reservation` WHERE `libraryID` = @patron_id;
 
 -- Deleting Patrons
@@ -67,8 +67,7 @@ INSERT INTO `Books` (`isbn`, `title`, `author`, `genre`) VALUES (@isbn, @title, 
 SELECT `isbn`, `title`, `author`, Genres.name as `genre` FROM `Books` LEFT JOIN `Genres` ON `genre` = Genres.id;
 
 -- Searching for a book
-SELECT `isbn`, `title`, `author`, Genres.name as `genre` FROM `Books` LEFT JOIN `Genres` ON `genre` = Genres.id
-WHERE `title` = @title;
+SELECT isbn, title, author, Genres.name as genre FROM Books LEFT JOIN Genres ON genre = Genres.id WHERE genre = @genre
 
 -- Editing books
 UPDATE `Books` SET `title` = @title, `author` = @author, `genre` = @book_genre WHERE `isbn` = @book_genre;
@@ -85,5 +84,5 @@ INSERT INTO `Patron_book` (`pid`, `bid`, `checkoutDate`, `returnDate`) VALUES (@
 SELECT Patrons.libraryID as `pid`, Books.isbn as `bid`, `checkoutDate`, `returnDate` FROM Patron_book LEFT JOIN `Patrons` ON `pid` = Patrons.libraryID
 LEFT JOIN `Books` ON `bid` = Books.isbn; 
 
--- Returning book (DELETE)
+-- Returning book (DELETE) (unused)
 DELETE FROM `Patron_book` WHERE `pid` = @pid AND `bid` = @bid;
