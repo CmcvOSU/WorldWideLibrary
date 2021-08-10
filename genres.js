@@ -15,10 +15,6 @@ module.exports = function(){
         });
     }
 
-    // router.get('/', function(req, res) {
-    //     res.render('genres')
-    // });
-
     // routes creating dynamic interation between web app and database 
 
     router.get('/', function(req, res){

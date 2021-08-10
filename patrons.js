@@ -15,10 +15,6 @@ module.exports = function(){
         });
     }
 
-    // router.get('/', function(req, res) {
-    //     res.render('patrons')
-    // });
-
     // routes creating dynamic interation between web app and database 
 
     router.get('/', function(req, res){
@@ -26,7 +22,6 @@ module.exports = function(){
         var context = {};
         context.jsscripts = ["deletePatron.js"];
         var mysql = req.app.get('mysql');
-        // helper function calls
         getPatrons(res, mysql, context, complete);
         function complete(){
             callbackCount++;

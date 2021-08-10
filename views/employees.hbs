@@ -42,6 +42,29 @@
     </table>
   </fieldset>
   <br>
+  <fieldset>
+      <h1>Books being borrowed</h1>
+      <table>
+          <thead>
+          <tr>
+              <th>Patron ID</th>
+              <th>Book ISBN</th>
+              <th>Checkout Date</th>
+              <th>Return Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          {{#each rentals}}
+              <tr>
+                  <td>{{pid}}</td>
+                  <td>{{bid}}</td>
+                  <td>{{checkoutDate}}</td>
+                  <td>{{returnDate}}</td>
+              </tr>
+          {{/each}}
+          </tbody>
+      </table>
+  </fieldset>
   <br>
   <a href="/patrons">Click here to manage Patrons</a>
   <br>

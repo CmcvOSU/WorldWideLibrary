@@ -18,7 +18,6 @@ app.use('/static', express.static('public'));
 
 // Routes
 app.use('/', require('./index.js'));
-app.use('/patron_account', require('./patron_account.js'));
 app.use('/books', require('./books.js'));
 app.use('/create_patron', require('./create_patron.js'));
 app.use('/employees', require('./employees.js'));

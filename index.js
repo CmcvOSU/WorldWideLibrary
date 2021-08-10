@@ -85,35 +85,6 @@ module.exports = function(){
         }
     });
 
-    router.get('/patron_reservation/:id', function(req, res){
-        callbackCount = 0;
-        var context = {id:req.params.id};
-        context.jsscripts = ["updatePatron.js, selectRoom.js"];
-        var mysql = req.app.get('mysql');
-        getPatrons(res, mysql, context, complete);
-        function complete(){
-            callbackCount++;
-            if(callbackCount >= 1){
-                res.render('patron_reservation', context);
-            }
-        }
-    });
-
-    router.put('/patron_reservation/:id', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "UPDATE Patrons SET reservation=? WHERE libraryID=?";
-        var inserts = [req.body.reservation, req.params.id];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.status(200);
-                res.end();
-            }
-        });
-    });
-
     router.get('/borrow/:id', function (req, res) {
         callbackCount = 0;
         var context = {};

@@ -26,9 +26,17 @@ module.exports = function(){
             complete();
         });
     }
-    // router.get('/', function(req, res) {
-    //     res.render('employees')
-    // });
+
+    function getRentals(res, mysql, context, complete){
+        mysql.pool.query("SELECT `pid`, `bid`, `checkoutDate`, `returnDate` from `Patron_book`", function (error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.rentals = results;
+            complete();
+        });
+    }
 
     // routes creating dynamic interaction between web app and database
 
@@ -39,9 +47,10 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         getLibrarians(res, mysql, context, complete);
         getGenres(res, mysql, context, complete);
+        getRentals(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 3){
                 res.render('employees', context);
             }
 
