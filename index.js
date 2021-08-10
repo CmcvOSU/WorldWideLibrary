@@ -118,7 +118,7 @@ module.exports = function(){
     router.get('/borrow/:id', function (req, res) {
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["borrowBook.js", "selectPatrons.js"];
+        context.jsscripts = ["selectPatrons.js"];
         var mysql = req.app.get('mysql');
         getBook(res, mysql, context, req.params.id, complete);
         getPatrons(res, mysql, context, complete);
