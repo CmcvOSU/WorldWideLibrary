@@ -100,7 +100,7 @@ module.exports = function(){
         }
     });
 
-    router.put('/:id', function(req, res){
+    router.put('/patron_reservation/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Patrons SET reservation=? WHERE libraryID=?";
         var inserts = [req.body.reservation, req.params.id];
