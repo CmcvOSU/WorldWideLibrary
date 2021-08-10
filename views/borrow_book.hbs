@@ -1,0 +1,21 @@
+<h1>Borrowing "{{book.title}}"</h1>
+<a href="/">Go Back</a>
+<br>
+<br>
+<fieldset>
+    <form id="borrow_book" action="/book/borrow" method="POST">
+        <label for="libraryId">Who is borrowing "{{book.title}}"? </label>
+        <select name="libraryId" id="libraryId">
+            {{#each patrons}}
+                <option value="{{libraryID}}">{{libraryID}} - {{firstName}} {{lastName}}</option>
+            {{/each}}
+        </select>
+        <br>
+        <br>
+        <label for="checkout_d">Checkout date: </label>
+        <input type="date" id="checkout_d" name="checkout_d">
+        <label for="return_d">Return date: </label>
+        <input type="date" id="return_d" name="return_d">
+        <button>Submit</button>
+    </form>
+</fieldset>
