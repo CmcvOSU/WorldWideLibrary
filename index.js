@@ -69,17 +69,6 @@ module.exports = function(){
         });
     }
 
-    function getPatronIDs(res, mysql, context, complete){
-        mysql.pool.query("SELECT `libraryID` from `Patrons`", function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.patrons  = results;
-            complete();
-        });
-    }
-
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -101,7 +90,7 @@ module.exports = function(){
         var context = {id:req.params.id};
         context.jsscripts = ["updatePatron.js"];
         var mysql = req.app.get('mysql');
-        getPatronIDs(res, mysql, context, complete);
+        getPatrons(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){

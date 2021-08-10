@@ -1,9 +1,10 @@
+<a href="/">Go Back</a>
 <h1>Reserving room {{id}}</h1>
 <fieldset>
     <form id="update_patron" action="/patron_reservation" method="POST">
         <select id="libraryID" name="libraryID">
             {{#each patrons}}
-            <option value="{{libraryID}}">{{libraryID}}</option>
+            <option value="{{libraryID}}">{{libraryID}} - {{firstName}} {{lastName}}</option>
             {{/each}}
             <input type="hidden" id="reservation" name="reservation" value="{{id}}">
         </select>
