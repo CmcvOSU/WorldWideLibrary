@@ -1,4 +1,3 @@
-<!-- index.hbs -->
 <button type="button" name="login">Login</button>
     <h1>World Wide Library</h1>
     <fieldset>
@@ -58,7 +57,7 @@
                 <tr>
                     <td>{{roomNumber}}</td>
                     <td>{{capacity}}</td>
-                    <td><button type="button" onlick="">Reserve</button></td>
+                    <td><button type="button"><a href="/patron_reservation/{{roomNumber}}">Reserve</a></button></td>
                 </tr>
                 {{/each}}
             </tbody>

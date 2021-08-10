@@ -44,6 +44,17 @@ module.exports = function(){
         });
     }
 
+    function getPatronIDs(res, mysql, context, complete){
+        mysql.pool.query("SELECT `libraryID` from `Patrons`", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.patrons  = results;
+            complete();
+        });
+    }
+
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -59,5 +70,36 @@ module.exports = function(){
 
         }
     });
+
+    router.get('/patron_reservation/:id', function(req, res){
+        callbackCount = 0;
+        var context = {id:req.params.id};
+        context.jsscripts = ["updatePatron.js"];
+        var mysql = req.app.get('mysql');
+        getPatronIDs(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('patron_reservation', context);
+            }
+
+        }
+    });
+
+    router.put('/:id', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE Patrons SET reservation=? WHERE libraryID=?";
+        var inserts = [req.body.reservation, req.params.id];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
+    });
+
     return router;
 }();

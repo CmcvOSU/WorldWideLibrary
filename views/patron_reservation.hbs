@@ -1,0 +1,14 @@
+<h1>Reserving room {{id}}</h1>
+<fieldset>
+    <form id="update_patron" action="/patron_reservation" method="POST">
+        <select id="libraryID" name="libraryID">
+            {{#each patrons}}
+            <option value="{{libraryID}}">{{libraryID}}</option>
+            {{/each}}
+            <input type="hidden" id="reservation" name="reservation" value="{{id}}">
+        </select>
+        <button onclick=
+        "updatePatron("+document.getElementByTagName("select").value+")"
+        >Update</button>
+    </form>
+</fieldset>

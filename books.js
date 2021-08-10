@@ -47,10 +47,6 @@ module.exports = function(){
         });
     }
 
-    // router.get('/', function(req, res) {
-    //     res.render('books')
-    // });
-
     // routes creating dynamic interation between web app and database 
 
     router.get('/', function(req, res){
@@ -104,8 +100,8 @@ module.exports = function(){
 
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE Books SET isbn=?, title=?, author=?, genre=? WHERE isbn=?";
-        var inserts = [req.body.isbn, req.body.title, req.body.author, req.body.genre, req.params.id];
+        var sql = "UPDATE Books SET title=?, author=?, genre=? WHERE isbn=?";
+        var inserts = [req.body.title, req.body.author, req.body.genre, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
