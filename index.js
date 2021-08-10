@@ -22,6 +22,31 @@ module.exports = function(){
         });
     }
 
+    function getBook(res, mysql, context, id, complete) {
+        var sqlQuery = "SELECT `isbn`, `title` from Books WHERE isbn = ?";
+        var inserts = [id];
+        mysql.pool.query(sqlQuery, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.send();
+            }
+            context.book = results[0];
+            complete();
+        });
+    }
+
+    function getPatrons(res, mysql, context, complete){
+        var sqlQuery = "SELECT `libraryID`, `firstName`, `lastName` FROM `Patrons`"
+        mysql.pool.query(sqlQuery, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.patrons  = results;
+            complete();
+        });
+    }
+
     function getRooms(res, mysql, context, complete){
         mysql.pool.query("SELECT * FROM Rooms", function(error, results, fields){
             if(error){
@@ -101,5 +126,20 @@ module.exports = function(){
         });
     });
 
+    router.get('/borrow/:id', function (req, res) {
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["borrowBook.js", "selectPatrons.js"];
+        var mysql = req.app.get('mysql');
+        getBook(res, mysql, context, req.params.id, complete);
+        getPatrons(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('borrow_book', context);
+            }
+        }
+
+    });
     return router;
 }();

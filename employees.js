@@ -30,7 +30,7 @@ module.exports = function(){
     //     res.render('employees')
     // });
 
-    // routes creating dynamic interation between web app and database 
+    // routes creating dynamic interaction between web app and database
 
     router.get('/', function(req, res){
         var callbackCount = 0;
