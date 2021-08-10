@@ -8,8 +8,6 @@
             {{/each}}
             <input type="hidden" id="reservation" name="reservation" value="{{id}}">
         </select>
-        <button onclick=
-        "updatePatron("+document.getElementByTagName("select").value+")"
-        >Update</button>
+        <button onclick="updatePatron(document.getElementById("select").value)">Reserve</button>
     </form>
 </fieldset>

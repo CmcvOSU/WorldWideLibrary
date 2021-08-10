@@ -1,11 +1,11 @@
 function updatePatron(id){
     console.log("working")
     $.ajax({
-        url: '/' + id,
+        url: '/patron_reservation/' + id,
         type: 'PUT',
         data: $('#patron_reservation').serialize(),
         success: function(result){
-            window.location.replace("/");
+            window.location.replace("./");
         }
     })
 };

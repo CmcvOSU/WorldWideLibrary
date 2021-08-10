@@ -77,7 +77,6 @@ module.exports = function(){
             if(callbackCount >= 2){
                 res.render('update_book', context);
             }
-
         }
     });
 
