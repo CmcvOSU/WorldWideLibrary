@@ -128,7 +128,20 @@ module.exports = function(){
                 res.render('borrow_book', context);
             }
         }
+    });
 
+    router.post('/borrow/:id', function (req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO `Patron_book` (`pid`, `bid`, `checkoutDate`, `returnDate`) VALUES (?, ?, ?, ?)";
+        var inserts = [req.body.libraryId, req.body.isbn, req.body.checkout_d, req.body.return_d];
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            } else {
+                res.redirect('/');
+            }
+        });
     });
     return router;
 }();

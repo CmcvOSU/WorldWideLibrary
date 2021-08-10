@@ -3,7 +3,7 @@
 <br>
 <br>
 <fieldset>
-    <form id="borrow_book" action="/book/borrow" method="POST">
+    <form id="borrow_book" action="/borrow/{{book.isbn}}" method="POST">
         <label for="libraryId">Who is borrowing "{{book.title}}"? </label>
         <select name="libraryId" id="libraryId">
             {{#each patrons}}
@@ -16,6 +16,7 @@
         <input type="date" id="checkout_d" name="checkout_d">
         <label for="return_d">Return date: </label>
         <input type="date" id="return_d" name="return_d">
+        <input type="hidden" id="isbn" name="isbn" value="{{book.isbn}}">
         <button>Submit</button>
     </form>
 </fieldset>
